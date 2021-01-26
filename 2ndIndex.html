@@ -45,13 +45,24 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="Forecast" name="forecast"> 
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="Today's Forecast">
+                                            <option disabled="disabled" selected="selected">Today's Forecast</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input class="input--style-1" type="text" placeholder="Today's song" name="todays_song">
+                                </div>
+                            </div>
                         </div>
                         <div class="p-t-20">
                             <button class="btn btn--radius btn--green" type="submit">Submit</button>
@@ -61,45 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="page-wrapper bg-blue p-t-10 p-b-10 font-robo">
-        <div class="wrapper wrapper--w680">
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="Song Suggestion" name="suggestion">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <button class="btn btn--radius btn--green" type="Save Song">Save Song</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                      <br>
-                              
-                                      <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
-                                      <div class="panel panel-primary">
-                              
-                                        <!-- Panel Heading for the retrieved articles box -->
-                                        <div class="panel-heading">
-                                          <h3 class="panel-title"><strong><i class="fa fa-table"></i>   Song Suggestions</strong></h3>
-                                        </div>
-                              
-                                        <!-- This main panel will hold each of the resulting articles -->
-                                        <div class="panel-body" id="well-section">
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                            </div>
-                        </div>
-                    
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->

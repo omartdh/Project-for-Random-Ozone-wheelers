@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
   </head>
   <body>
-    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <!-- CSS Icons -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <!-- Style to fix the issue of text extending past panel length -->
@@ -33,11 +33,11 @@
       <h1 class="text-center"><strong><i class="fa fa-music note-o"></i> Weather/Mood Tracks</strong></h1>
     </div>
 
-    <!-- Row for Searching New York Times -->
+    <!-- Structure section -->
     <div class="row">
       <div class="col-sm-12">
         <br>
-        <!-- First panel is for handling the search parameters -->
+        <!-- First panel is for handling parameters -->
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Location Data</strong></h3>
@@ -65,7 +65,10 @@
                   </div>
              
               <!-- Here we have the cards used for the results -->
-              <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Find Songs</button>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><strong><i class="fa  fa-music note"></i>   Suggested Tracks</strong></h3>
+                </div>
 
               <!--inserting card group here. -->
               <div class="container">

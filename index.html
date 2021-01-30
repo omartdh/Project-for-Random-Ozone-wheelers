@@ -1,18 +1,21 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Weather Mood Tracks</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
-  </head>
-  <body>
-    <!-- CSS Icons -->
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <title>Weather Mood Tracks</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- CSS Icons -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <!-- Style to fix the issue of text extending past panel length -->
@@ -21,35 +24,35 @@
       word-break: break-all;
     }
   </style>
-</head>
+  </head>
 
-<body>
+  <body>
 
-  <!-- Main Search -->
-  <div class="container">
+    <!-- Main Search -->
+    <div class="container">
 
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #20315A ; color: white;">
-      <h1 class="text-center"><strong><i class="fa fa-music note-o"></i> Weather/Mood Tracks</strong></h1>
-    </div>
+      <!-- Jumbotron for Title -->
+      <div class="jumbotron" style="background-color: #20315A ; color: white;">
+        <h1 class="text-center"><strong><i class="fa fa-music note-o"></i> Weather/Mood Tracks</strong></h1>
+      </div>
 
-    <!-- Structure section -->
-    <div class="row">
-      <div class="col-sm-12">
-        <br>
-        <!-- First panel is for handling parameters -->
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Location Data</strong></h3>
-          </div>
-          <div class="panel-body">
+      <!-- Structure section -->
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+          <!-- First panel is for handling parameters -->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i> Location Data</strong></h3>
+            </div>
+            <div class="panel-body">
 
-            <!-- Here we create an HTML Form for handling the inputs-->
-            <form role="form">
+              <!-- Here we create an HTML Form for handling the inputs-->
+              <form role="form">
 
-              <!-- Here we create the text box for capturing the location data-->
-              <div class="form-group">
-                <div class="card">
+                <!-- Here we create the text box for capturing the location data-->
+                <div class="form-group">
+                  <div class="card">
                     <div class="card-header">
                       City Name
                     </div>
@@ -63,68 +66,110 @@
                       <a href="#" class="btn btn-primary">Find Songs</a>
                     </div>
                   </div>
-             
-              <!-- Here we have the cards used for the results -->
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title"><strong><i class="fa  fa-music note"></i>   Suggested Tracks</strong></h3>
+
+                  <!-- Here we have the cards used for the results -->
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><strong><i class="fa  fa-music note"></i> Suggested Tracks</strong></h3>
+                    </div>
+
+                    <!--inserting card group here. -->
+                    <div id="songsContainer" class="container">
+                      <div id="songsRow1" class="row row-cols-auto">
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-              <!--inserting card group here. -->
-              <div class="container">
-                <div class="row row-cols-auto">
-                  <div class="col">Song</div>
-                  <div class="card-body">
-                    <h5 class="card-title">Card place holder</h5>
-                    <p class="card-text">placeholder.</p>
-                    <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Save</button>
+                <!-- Card and Row group for saved songs -->
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><strong><i class="fa  fa-music note"></i> Saved Tracks</strong></h3>
                   </div>
 
-                  <div class="col">Song</div>
-                  <div class="card-body">
-                    <h5 class="card-title">Card place holder</h5>
-                    <p class="card-text">placeholder.</p>
-                    <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Save</button>
-                  </div>
+                  <div id="songsContainer" class="container">
+                    <div id="songsRow1" class="row row-cols-auto">
 
-                  <div class="col">Song</div>
-                  <div class="card-body">
-                    <h5 class="card-title">Card place holder</h5>
-                    <p class="card-text">placeholder.</p>
-                    <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Save</button>
+                    </div>
                   </div>
-
-                  <div class="col">Song</div>
-                  <div class="card-body">
-                    <h5 class="card-title">Card place holder</h5>
-                    <p class="card-text">placeholder.</p>
-                    <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Save</button>
-                  </div>
-
-                  <div class="col">Song</div>
-                  <div class="card-body">
-                    <h5 class="card-title">Card place holder</h5>
-                    <p class="card-text">placeholder.</p>
-                    <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Save</button>
-                  </div>
-
                 </div>
-                </div>
-                </div>
-              </div>
-
-
+            </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      function buildSongRows(weatherWord) {
+        const testArraySongs = ["Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar", "Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar"];
+        const testArrayArtists = ["Johnny Cash", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down", "Jenny Bucks", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down"];
+        // function global counter to count through ten songs
+        let songCounter = 0;
+        // For loop to build two rows of songs
+        for (let i = 0; i < 2; i++) {
+          //Making new row 
+          const songsRow = $("<div>");
+          songsRow.addClass("row row-cols-auto");
+          for (let i = 0; i < 5; i++) {
+            // Creating Song Card for new song
+            const songCol = $("<div>");
+            songCol.addClass("col");
+            const songCard = $("<div>");
+            songCard.addClass("card-body");
+            // getting and setting song title in card
+            const songTitle = $("<h5>");
+            songTitle.addClass("card-title");
+            const songTLink = $("<a>");
+            songTLink.text(testArraySongs[songCounter]);
+            songTLink.attr("href", "youtube.com");
+            // getting and setting song artist with link
+            const songArtist = $("<p>");
+            songArtist.addClass("card-text");
+            const songALink = $("<a>");
+            songALink.text(testArrayArtists[songCounter]);
+            songALink.attr("href", "youtube.com");
+            //creating Save button
+            const saveButton = $("<button>");
+            saveButton.attr("type", "submit");
+            saveButton.addClass("btn btn-default saveBtn");
+            saveButton.text("Save");
+            //appending all items as needed
+            songTitle.append(songTLink);
+            songArtist.append(songALink);
+            songCard.append(songTitle);
+            songCard.append(songArtist);
+            songCard.append(saveButton);
+            songsRow.append(songCol);
+            songsRow.append(songCard);
+            songCounter++;
+          }
+          $("#songsContainer").append(songsRow);
+        }
+
+      }
+      $(document).ready(function () {
+        let tempWord = "Cloudy";
+        buildSongRows(tempWord);
+
+
+      })
+
+      $(document).on("click", ".saveBtn", function(){
+            
+            // localStorage.setItem("lastSearch", repCity);
+        })
+
+
+    </script>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
@@ -132,4 +177,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     -->
   </body>
+
 </html>

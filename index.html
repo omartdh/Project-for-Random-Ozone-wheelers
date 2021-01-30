@@ -54,16 +54,19 @@
                 <div class="form-group">
                   <div class="card">
                     <div class="card-header">
-                      City Name
+                      <h3>Look for a City</h3>
+                      <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                        <button class="btn btn-outline-success" type="submit" id="search-city">Search</button>
+                      </form>
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title">Zip Code</h5>
-                      <p class="card-text">Today’s Forecast</p>
-                      <p class="card-text">Temperture:</p>
-                      <p class="card-text">Humidity:</p>
-                      <p class="card-text">Wind Speed:</p>
-                      <p class="card-text">UV Index:</p>
-                      <a href="#" class="btn btn-primary">Find Songs</a>
+                      <div class="card-text" id="city-name"></div>
+                      <div class="card-text" id="temp"></div>
+                      <div class="card-text" id="humidity"></div>
+                      <div class="card-text" id="wind"></div>
+
+                      <a href="#" class="btn btn-primary mt-5">Find Songs</a>
                     </div>
                   </div>
 
@@ -102,6 +105,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
       function buildSavedSongs(){
+        console.log("tried to build saved");
         $("#songsRowSaved").empty();
         let storeCount = 0;
         const songsRow = $("#songsRowSaved");
@@ -118,17 +122,17 @@
             songTitle.addClass("card-title");
             const songTLink = $("<a>");
             songTLink.text(songDict["title"]);
-            songTLink.innherHTML(songDict["url"]);
+            songTLink.attr("href", songDict["url"]);
             // getting and setting song artist with link
             const songArtist = $("<p>");
             songArtist.addClass("card-text");
             const songALink = $("<a>");
-            songALink.text(testArrayArtists[songCounter]);
-            songALink.attr("href", "youtube.com");
+            songALink.text(songDict["artist"]);
+            songALink.attr("href", songDict["url"]);
             //creating Save button
             const saveButton = $("<button>");
             saveButton.addClass("btn btn-default saveBtn");
-            saveButton.text("Save");
+            saveButton.text("Unsave");
             //appending all items as needed
             songTitle.append(songTLink);
             songArtist.append(songALink);
@@ -137,6 +141,7 @@
             songCard.append(saveButton);
             songsRow.append(songCol);
             songsRow.append(songCard);
+            storeCount++
 
         }
       }
@@ -187,10 +192,8 @@
 
       }
       $(document).ready(function () {
-        let tempWord = "Cloudy";
+        const tempWord = "cloudy";
         buildSongRows(tempWord);
-
-
       })
 
       $(document).on("click", ".saveBtn", function(){
@@ -210,7 +213,7 @@
         }
         const siblings = $(this).siblings();
           const sTitle = siblings[0].innerText;
-          const sUrl = siblings[0].innerHTML;
+          const sUrl = siblings[0].children[0].attributes[0].nodeValue;
           const sArtist = siblings[1].innerText;
           const songDict = {
             "title": sTitle,
@@ -219,8 +222,7 @@
           }
           const dictString = JSON.stringify(songDict);
           localStorage.setItem(savePosition, dictString);
-          console.log(localStorage);
-          
+          buildSavedSongs();
         })
 
 
@@ -232,6 +234,7 @@
       crossorigin="anonymous"></script>
     <!--Javascript file-->
     <script src="lastfm.js"></script>
+    <script src="script.js"></script>
   </body>
 
 </html>

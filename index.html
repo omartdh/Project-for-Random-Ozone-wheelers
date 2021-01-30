@@ -88,7 +88,7 @@
                   </div>
 
                   <div id="songsContainer" class="container">
-                    <div id="songsRow1" class="row row-cols-auto">
+                    <div id="songsRowSaved" class="row row-cols-auto">
 
                     </div>
                   </div>
@@ -101,6 +101,45 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+      function buildSavedSongs(){
+        $("#songsRowSaved").empty();
+        let storeCount = 0;
+        const songsRow = $("#songsRowSaved");
+        while(localStorage.getItem(storeCount)  != null){
+          const JSobject = localStorage.getItem(storeCount);
+          const songDict = JSON.parse(JSobject);
+          // Creating Song Card for new song
+          const songCol = $("<div>");
+            songCol.addClass("col");
+            const songCard = $("<div>");
+            songCard.addClass("card-body");
+            // getting and setting song title in card
+            const songTitle = $("<h5>");
+            songTitle.addClass("card-title");
+            const songTLink = $("<a>");
+            songTLink.text(songDict["title"]);
+            songTLink.innherHTML(songDict["url"]);
+            // getting and setting song artist with link
+            const songArtist = $("<p>");
+            songArtist.addClass("card-text");
+            const songALink = $("<a>");
+            songALink.text(testArrayArtists[songCounter]);
+            songALink.attr("href", "youtube.com");
+            //creating Save button
+            const saveButton = $("<button>");
+            saveButton.addClass("btn btn-default saveBtn");
+            saveButton.text("Save");
+            //appending all items as needed
+            songTitle.append(songTLink);
+            songArtist.append(songALink);
+            songCard.append(songTitle);
+            songCard.append(songArtist);
+            songCard.append(saveButton);
+            songsRow.append(songCol);
+            songsRow.append(songCard);
+
+        }
+      }
       function buildSongRows(weatherWord) {
         const testArraySongs = ["Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar", "Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar"];
         const testArrayArtists = ["Johnny Cash", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down", "Jenny Bucks", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down"];
@@ -131,7 +170,6 @@
             songALink.attr("href", "youtube.com");
             //creating Save button
             const saveButton = $("<button>");
-            saveButton.attr("type", "submit");
             saveButton.addClass("btn btn-default saveBtn");
             saveButton.text("Save");
             //appending all items as needed
@@ -156,26 +194,42 @@
       })
 
       $(document).on("click", ".saveBtn", function(){
-            
-            // localStorage.setItem("lastSearch", repCity);
+        event.preventDefault();
+        let savePosition = 0;
+        if( localStorage.getItem("lastUsed") === null){
+          localStorage.setItem("lastUsed", savePosition);
+        }
+        else if(localStorage.getItem("lastUsed") >=4 ){
+          savePosition = 0;
+          localStorage.setItem("lastUsed", savePosition);
+        }
+        else{
+          savePosition = localStorage.getItem("lastUsed");
+          savePosition++
+          localStorage.setItem("lastUsed", savePosition);
+        }
+        const siblings = $(this).siblings();
+          const sTitle = siblings[0].innerText;
+          const sUrl = siblings[0].innerHTML;
+          const sArtist = siblings[1].innerText;
+          const songDict = {
+            "title": sTitle,
+            "url": sUrl,
+            "artist": sArtist
+          }
+          const dictString = JSON.stringify(songDict);
+          localStorage.setItem(savePosition, dictString);
+          console.log(localStorage);
+          
         })
 
 
     </script>
 
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    -->
     <!--Javascript file-->
     <script src="lastfm.js"></script>
   </body>

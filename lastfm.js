@@ -4,13 +4,13 @@ var track=$("#trackName");
 var findTrack=$("#search-track");
 var searchButton = $("#search-button");
 var artist=$("#artist");
-var URLname=$("#URL")
+var URLname=$("#URL");
 
 /// Keyword search for name
 
 ///AJAX call
 $("#search-button").on("click",trackResults);
-function trackNames(trackResults){ }
+function trackNames(trackResults){
     let queryURL= "/2.0/?method=track.search&track=" + track + "&APPID=" + APIKey;
     $.ajax({
         url:queryURL,
@@ -19,7 +19,7 @@ function trackNames(trackResults){ }
     console.log(response)
     //Cache object
        var cache = new LastFMCache();
-       //LastFM object
+    //LastFM object
        var lastfm = new LastFM({
        });
     //load name of track
@@ -34,5 +34,4 @@ function trackNames(trackResults){ }
                    $('#').html(
                        $('#lastfmTemplateTracks').render(data.artist.name)
                    );
-               }});
-    //           
+               }});  

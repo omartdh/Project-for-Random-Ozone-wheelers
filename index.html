@@ -56,7 +56,8 @@
                     <div class="card-header">
                       <h3>Look for a City</h3>
                       <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                          id="search-input">
                         <button class="btn btn-outline-success" type="submit" id="search-city">Search</button>
                       </form>
                     </div>
@@ -104,16 +105,16 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-      function buildSavedSongs(){
-        console.log("tried to build saved");
+      function buildSavedSongs() {
         $("#songsRowSaved").empty();
-        let storeCount = 0;
         const songsRow = $("#songsRowSaved");
-        while(localStorage.getItem(storeCount)  != null){
-          const JSobject = localStorage.getItem(storeCount);
-          const songDict = JSON.parse(JSobject);
-          // Creating Song Card for new song
-          const songCol = $("<div>");
+
+        for (let i = 0; i < 5; i++) {
+          if (localStorage.getItem(i) != null) {
+            const JSobject = localStorage.getItem(i);
+            const songDict = JSON.parse(JSobject);
+            // Creating Song Card for new song
+            const songCol = $("<div>");
             songCol.addClass("col");
             const songCard = $("<div>");
             songCard.addClass("card-body");
@@ -131,7 +132,7 @@
             songALink.attr("href", songDict["url"]);
             //creating Save button
             const saveButton = $("<button>");
-            saveButton.addClass("btn btn-default saveBtn");
+            saveButton.addClass("btn btn-default unSaveBtn");
             saveButton.text("Unsave");
             //appending all items as needed
             songTitle.append(songTLink);
@@ -141,9 +142,24 @@
             songCard.append(saveButton);
             songsRow.append(songCol);
             songsRow.append(songCard);
-            storeCount++
-
+          }
         }
+      }
+      function checkSavedSongs(songTitle, songArtist) {
+
+        for (let i = 0; i < 5; i++) {
+          if (localStorage.getItem(i) != null) {
+            const sjDict = localStorage.getItem(i);
+            const sDict = JSON.parse(sjDict);
+            const name = sDict["title"];
+            const artist = sDict["artist"];
+
+            if (name == songTitle && songArtist == artist) {
+              return true;
+            }
+          }
+        }
+        return false;
       }
       function buildSongRows(weatherWord) {
         const testArraySongs = ["Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar", "Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar"];
@@ -194,36 +210,62 @@
       $(document).ready(function () {
         const tempWord = "cloudy";
         buildSongRows(tempWord);
+        buildSavedSongs();
       })
-
-      $(document).on("click", ".saveBtn", function(){
+      $(document).on("click", ".unSaveBtn", function () {
         event.preventDefault();
-        let savePosition = 0;
-        if( localStorage.getItem("lastUsed") === null){
-          localStorage.setItem("lastUsed", savePosition);
-        }
-        else if(localStorage.getItem("lastUsed") >=4 ){
-          savePosition = 0;
-          localStorage.setItem("lastUsed", savePosition);
-        }
-        else{
-          savePosition = localStorage.getItem("lastUsed");
-          savePosition++
-          localStorage.setItem("lastUsed", savePosition);
-        }
+        let unsavePosition = 0
         const siblings = $(this).siblings();
-          const sTitle = siblings[0].innerText;
-          const sUrl = siblings[0].children[0].attributes[0].nodeValue;
-          const sArtist = siblings[1].innerText;
-          const songDict = {
-            "title": sTitle,
-            "url": sUrl,
-            "artist": sArtist
+        const sTitle = siblings[0].innerText;
+        const sArtist = siblings[1].innerText;
+        for (let i = 0; i < 5; i++) {
+          if(localStorage.getItem(i) != null){
+          const sjDict = localStorage.getItem(i);
+          const sDict = JSON.parse(sjDict);
+          const name = sDict["title"];
+          const artist = sDict["artist"];
+
+          if (name == sTitle && sArtist == artist) {
+            unsavePosition = i;
+            i = 5;
           }
-          const dictString = JSON.stringify(songDict);
-          localStorage.setItem(savePosition, dictString);
-          buildSavedSongs();
-        })
+        }
+        }
+        localStorage.removeItem(unsavePosition);
+        buildSavedSongs();
+      })
+      $(document).on("click", ".saveBtn", function () {
+        event.preventDefault();
+        let savePosition = -1;
+        const siblings = $(this).siblings();
+        const sTitle = siblings[0].innerText;
+        const sUrl = siblings[0].children[0].attributes[0].nodeValue;
+        const sArtist = siblings[1].innerText;
+        if (!checkSavedSongs(sTitle, sArtist)) {
+          for (let i = 0; i < 5; i++) {
+            if (localStorage.getItem(i) == null) {
+              savePosition = i;
+              i = 5;
+            }
+          }
+          if (savePosition == -1) {
+            alert("No more storage spots available.");
+          }
+          else {
+            const songDict = {
+              "title": sTitle,
+              "url": sUrl,
+              "artist": sArtist
+            }
+            const dictString = JSON.stringify(songDict);
+            localStorage.setItem(savePosition, dictString);
+            buildSavedSongs();
+          }
+        }
+        else {
+          alert("This song is already saved. It cannot be saved twice.")
+        }
+      })
 
 
     </script>

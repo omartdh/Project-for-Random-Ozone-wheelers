@@ -119,10 +119,11 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+    // Function to build saved song list based off users local storage
       function buildSavedSongs() {
         $("#songsRowSaved").empty();
         const songsRow = $("#songsRowSaved");
-
+        // Accesses local storage according to 5 used spots
         for (let i = 0; i < 5; i++) {
           if (localStorage.getItem(i) != null) {
             const JSobject = localStorage.getItem(i);

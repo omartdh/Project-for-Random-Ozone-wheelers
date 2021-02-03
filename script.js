@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //builds out locally saved songs on opening the page
   buildSavedSongs();
   const apiKey = "1eab01d7108337f226a88f463c7de917";
 
@@ -20,7 +21,7 @@ $(document).ready(function () {
     $('#icon').empty();
 }
 
-//search btn function will grab all the API data based on the city that entered
+//function to pull tracks from LastFM and add them into an array for use on the site. collects title, artist, and url
 
 
   function trackNames(track) {
@@ -36,9 +37,11 @@ $(document).ready(function () {
         songsArray.push(tracks[i].artist);
         songsArray.push(tracks[i].url)
       }
+      //builds song rows once the song information has been collected
       buildSongRows();
     })
   }
+  //takes song information and builds it into songs on the page
   function buildSongRows() {
     $("#songsContainer").empty();
     let testArraySongs = [];
@@ -92,19 +95,19 @@ $(document).ready(function () {
     }
 
   }
-
+  //clicke event that sstarts the city search and song search 
   $('#search-city').on('click', function (event) {
     event.preventDefault();
     cityName = $('#search-input').val();
 
     let QueryURL = mainQueryURL + cityName + "&appid=" + apiKey;
 
-
+    //ajax query for the open weather
     $.ajax({
       url: QueryURL,
       method: "GET"
     }).then(function (response) {
-
+      //code to interpret openweather info and push onto page
       temp = (response.main.temp * 9 / 5) - 459.67;
       let tempStr = temp.toString();
       tempStr = tempStr.substring(0, 2);
@@ -121,7 +124,7 @@ $(document).ready(function () {
       $('#temp').text("Temp: " + tempStr + " F");
       $('#humidity').text('Humidity: ' + response.main.humidity + " %");
       $('#wind').text('Wind Speed: ' + response.wind.speed + " MPH");
-
+      //saves keyword for last FM search and then goes to tracknames function to perform search. 
       wKeyWord = response.weather[0].main;
       trackNames(wKeyWord);
     })

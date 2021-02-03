@@ -160,6 +160,7 @@
           }
         }
       }
+      //Function to check if song has been saved previously or not. Ensure a song is not saved twice, checks song name and artist. 
       function checkSavedSongs(songTitle, songArtist) {
 
         for (let i = 0; i < 5; i++) {
@@ -176,13 +177,15 @@
         }
         return false;
       }
-
+      // unsaves songs on click 
       $(document).on("click", ".unSaveBtn", function () {
         event.preventDefault();
-        let unsavePosition = 0
+        let unsavePosition = 0;
+        //Determines song information from the button it was clicked on
         const siblings = $(this).siblings();
         const sTitle = siblings[0].innerText;
         const sArtist = siblings[1].innerText;
+        //iterates through local storage to find the item to then unsave it. 
         for (let i = 0; i < 5; i++) {
           if(localStorage.getItem(i) != null){
           const sjDict = localStorage.getItem(i);
@@ -199,13 +202,16 @@
         localStorage.removeItem(unsavePosition);
         buildSavedSongs();
       })
+      //Saves song to local storage on click
       $(document).on("click", ".saveBtn", function () {
         event.preventDefault();
         let savePosition = -1;
+        //gets song information based on button clicked
         const siblings = $(this).siblings();
         const sTitle = siblings[0].innerText;
         const sUrl = siblings[0].children[0].attributes[0].nodeValue;
         const sArtist = siblings[1].innerText;
+        //checks that song has not been saved before
         if (!checkSavedSongs(sTitle, sArtist)) {
           for (let i = 0; i < 5; i++) {
             console.log("checking");
@@ -215,6 +221,7 @@
               i = 5;
             }
           }
+          //alerts user if all 5 save spots are already taken
           if (savePosition == -1) {
             alert("No more storage spots available.");
           }
@@ -224,11 +231,13 @@
               "url": sUrl,
               "artist": sArtist
             }
+            //writes song to local storage if there is space and then rewrites saved songs based on local storage
             const dictString = JSON.stringify(songDict);
             localStorage.setItem(savePosition, dictString);
             buildSavedSongs();
           }
         }
+        //lets users know that they cannot save the same song twice
         else {
           alert("This song is already saved. It cannot be saved twice.")
         }

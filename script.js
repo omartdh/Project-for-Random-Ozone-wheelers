@@ -44,6 +44,9 @@ $('#search-city').on('click', function(event){
 
         $('#icon').append(iconLogo);
         $('#city-name').append($('<h4>').text(response.name));
+       // $('#card-'+ i).css('background-color', 'rgb(0, 102, 255)');
+        $('#city-name').css('font-size', '100%');
+        
         $('#temp').text("Temp: " + tempStr + " F");
         $('#humidity').text('Humidity: ' + response.main.humidity + " %");
         $('#wind').text('Wind Speed: ' + response.wind.speed + " MPH");

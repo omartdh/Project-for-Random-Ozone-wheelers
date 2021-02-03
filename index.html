@@ -17,9 +17,21 @@
 
   <!-- Style to fix the issue of text extending past panel length -->
   <style>
+    body {
+      background: url(https://wallpaper-house.com/data/out/9/wallpaper2you_351708.jpg); 
+    }
     .panel-body a {
       word-break: break-all;
     }
+    #topPage {
+      font-size: 70px;
+      color: rgb(112, 107, 107);
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+    }
+
   </style>
 </head>
 
@@ -29,8 +41,8 @@
   <div class="container">
 
     <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #20315A ; color: white;">
-      <h1 class="text-center"><strong><i class="fa fa-music note-o"></i> Weather/Mood Tracks</strong></h1>
+    <div calss="text-center" id="topPage">
+      <strong><i class="fa fa-music note-o"></i> Weather/Mood Tracks</strong>
     </div>
 
     <!-- Structure section -->
@@ -40,7 +52,7 @@
         <!-- First panel is for handling parameters -->
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Location Data</strong></h3>
+            <div class="panel-title text-center"><strong><i class="fa  fa-list-alt"></i>   Location Data</strong></div>
           </div>
           <div class="panel-body">
 
@@ -57,20 +69,19 @@
                         <button class="btn btn-outline-success" type="submit" id="search-city">Search</button>
                       </form>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body weather">
+                        <div class="card-text" id="icon"></div>
                       <div class="card-text" id="city-name"></div>
                       <div class="card-text" id="temp"></div>
                       <div class="card-text" id="humidity"></div>
                       <div class="card-text" id="wind"></div>
-
-                      <a href="#" class="btn btn-primary mt-5">Find Songs</a>
                     </div>
                   </div>
              
               <!-- Here we have the cards used for the results -->
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  <h3 class="panel-title"><strong><i class="fa  fa-music note"></i>   Suggested Tracks</strong></h3>
+                  <div class="panel-title text-center"><strong><i class="fa  fa-music note"></i>   Suggested Tracks</strong></div>
                 </div>
 
               <!--inserting card group here. -->

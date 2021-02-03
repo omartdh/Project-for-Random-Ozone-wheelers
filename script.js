@@ -10,14 +10,16 @@ let temp = "";
 //this key word is to use for the song URL
 let wKeyWord = "";
 
-
+//inisialiser function do reset all the feild
 function inisialiser(){
     $('#city-name').empty();
     $('#temp').empty();
     $('#humidity').empty();
     $('#wind').empty();
+    $('#icon').empty();
 }
 
+//search btn function will grab all the API data based on the city that entered
 $('#search-city').on('click', function(event){
   event.preventDefault();
 
@@ -40,15 +42,18 @@ $('#search-city').on('click', function(event){
         let iconLogo = $('<img>');
         iconLogo.attr("src",iconUrl);
 
-        
-
-        $('#city-name').append(iconLogo);
+        $('#icon').append(iconLogo);
         $('#city-name').append($('<h4>').text(response.name));
         $('#temp').text("Temp: " + tempStr + " F");
         $('#humidity').text('Humidity: ' + response.main.humidity + " %");
         $('#wind').text('Wind Speed: ' + response.wind.speed + " MPH");
             
         wKeyWord = response.weather[0].main;
+        //Drizzle
+        //Clouds
+       // Clear
+        //Snow
+        
         })
          
      inisialiser();

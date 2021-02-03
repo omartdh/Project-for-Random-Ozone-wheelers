@@ -76,7 +76,7 @@ $(document).ready(function () {
         songArtist.addClass("card-text");
         const songALink = $("<a>");
         songALink.text(testArrayArtists[songCounter]);
-        songALink.attr("href", "youtube.com");
+        songALink.attr("href", testArrayUrls[songCounter]);
         //creating Save button
         const saveButton = $("<button>");
         saveButton.addClass("btn btn-default saveBtn");

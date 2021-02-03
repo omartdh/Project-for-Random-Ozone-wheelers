@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 
   function trackNames(track) {
-    let queryURL = "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + track + "&api_key=" + APIKey + "&format=json";
+    let queryURL = "https://ws.audioscrobbler.com/2.0/?method=track.search&track=" + track + "&api_key=" + APIKey + "&format=json";
     $.ajax({
       url: queryURL,
       method: "GET",

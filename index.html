@@ -12,6 +12,7 @@
 
   <title>Weather Mood Tracks</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -174,57 +175,7 @@
         }
         return false;
       }
-      function buildSongRows(weatherWord) {
-        const testArraySongs = ["Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar", "Hurt", "Paparazzi", "Fortunate Son", "Chandelier", "Sugar"];
-        const testArrayArtists = ["Johnny Cash", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down", "Jenny Bucks", "Lady Gaga", "Creedence Clearwater Revival", "Sia", "System of a Down"];
-        // function global counter to count through ten songs
-        let songCounter = 0;
-        // For loop to build two rows of songs
-        for (let i = 0; i < 2; i++) {
-          //Making new row 
-          const songsRow = $("<div>");
-          songsRow.addClass("row row-cols-auto");
-          for (let i = 0; i < 5; i++) {
-            // Creating Song Card for new song
-            const songCol = $("<div>");
-            songCol.addClass("col");
-            const songCard = $("<div>");
-            songCard.addClass("card-body");
-            // getting and setting song title in card
-            const songTitle = $("<h5>");
-            songTitle.addClass("card-title");
-            const songTLink = $("<a>");
-            songTLink.text(testArraySongs[songCounter]);
-            songTLink.attr("href", "youtube.com");
-            // getting and setting song artist with link
-            const songArtist = $("<p>");
-            songArtist.addClass("card-text");
-            const songALink = $("<a>");
-            songALink.text(testArrayArtists[songCounter]);
-            songALink.attr("href", "youtube.com");
-            //creating Save button
-            const saveButton = $("<button>");
-            saveButton.addClass("btn btn-default saveBtn");
-            saveButton.text("Save");
-            //appending all items as needed
-            songTitle.append(songTLink);
-            songArtist.append(songALink);
-            songCard.append(songTitle);
-            songCard.append(songArtist);
-            songCard.append(saveButton);
-            songsRow.append(songCol);
-            songsRow.append(songCard);
-            songCounter++;
-          }
-          $("#songsContainer").append(songsRow);
-        }
 
-      }
-      $(document).ready(function () {
-        const tempWord = "cloudy";
-        buildSongRows(tempWord);
-        buildSavedSongs();
-      })
       $(document).on("click", ".unSaveBtn", function () {
         event.preventDefault();
         let unsavePosition = 0
@@ -256,6 +207,8 @@
         const sArtist = siblings[1].innerText;
         if (!checkSavedSongs(sTitle, sArtist)) {
           for (let i = 0; i < 5; i++) {
+            console.log("checking");
+            console.log(localStorage.getItem(i));
             if (localStorage.getItem(i) == null) {
               savePosition = i;
               i = 5;
@@ -288,8 +241,8 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"></script>
     <!--Javascript file-->
-    <script src="lastfm.js"></script>
     <script src="script.js"></script>
+    
   </body>
 
 </html>
